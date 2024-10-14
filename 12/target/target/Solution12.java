@@ -17,19 +17,24 @@ package target;
  */
 
 public class Solution12 {
-    public String multiply(String num1, String num2) {
+    public String multiply(String num1, String num2) throws IllegalArgumentException{
         if (num1.equals("0") | num2.equals("0")) {
             return "0";
         }
+
         String ans = "0";
         int m = num1.length(), n = num2.length();
         for (int i = n - 1; i >= 0; i--) {
             StringBuilder curr = new StringBuilder();
             int y = num2.charAt(i) - '0';
+            if(y < 0 || y >9)
+                throw new IllegalArgumentException();
             curr.append("0".repeat(Math.max(0, n - 1 - i))); // 将0添加到末尾
             int add = 0;
             for (int j = m - 1; j >= 0; j--) {
                 int x = num1.charAt(j) - '0';
+                if(x < 0 || x >9)
+                    throw new IllegalArgumentException();
                 int product = x * y + add;
                 curr.append(product % 10);
                 add = product / 10;
